@@ -1,0 +1,14 @@
+{
+  "name": "compass",
+  "version": "1.0.0",
+  "description": "Orienteering compass model web app",
+  "main": "theoretical_model.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Nicolas Rio",
+  "license": "ISC",
+  "dependencies": {
+    "geomag": "^1.0.0"
+  }
+}

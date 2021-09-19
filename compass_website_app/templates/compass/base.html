@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Theme Template for Bootstrap</title>
+    <link href="{% static 'compass/css/w3.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="w3-bar w3-border w3-light-grey">
+      <a href="#" class="w3-bar-item w3-button w3-mobile w3-blue w3-xxlarge">Orienteering compasses</a>
+      <a href="#" class="w3-bar-item w3-button w3-mobile">Theory</a>
+      <div class="w3-dropdown-hover w3-mobile">
+        <button class="w3-button">Experimental model<i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+          <a href="{% url 'experimental_model' %}" class="w3-bar-item w3-button w3-mobile">Model</a>
+          <a href="#" class="w3-bar-item w3-button w3-mobile">Parameters</a>
+          <a href="{% url 'experimental_values' %}" class="w3-bar-item w3-button w3-mobile">Experimental values</a>
+        </div>
+      </div>
+      <div class="w3-dropdown-hover w3-mobile">
+        <button class="w3-button">Theoretical model<i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+          <a href="{% url 'theoretical_model' %}" class="w3-bar-item w3-button w3-mobile">Model</a>
+          <a href="#" class="w3-bar-item w3-button w3-mobile">Balance map</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

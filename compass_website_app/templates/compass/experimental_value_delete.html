@@ -1,0 +1,14 @@
+{% extends 'compass/base.html' %}
+{% load static %}
+
+{% block title %} experimental_model {% endblock %}
+
+{% block content %}
+      <form method="post" class="w3-container">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <p>
+          <input type="submit" value="Confirm" class="w3-button w3-round w3-teal">
+        </p>
+      </form>
+
+{% endblock %}

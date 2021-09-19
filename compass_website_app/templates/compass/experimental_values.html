@@ -1,0 +1,43 @@
+{% extends 'compass/base.html' %}
+{% load static %}
+
+{% block title %} experimental_model {% endblock %}
+
+{% block content %}
+
+    <div class="w3-container">
+
+      <h1>Experimental values</h1>
+
+      <button class="w3-button w3-round-large w3-teal" onclick="location.href='{% url 'create_experimental_value' %}'">Add experimental value</button>
+
+      <table class="w3-table w3-striped w3-bordered w3-mobile">
+        <thead>
+          <tr>
+            <th>Disk diameter</th>
+            <th>Magnet offset</th>
+            <th>Balance</th>
+            <th>Stability</th>
+            <th>Rapidity</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+					{% for value in object_list %}
+          <tr>
+            <td>{{ value.disk_diameter }}</td>
+            <td>{{ value.magnet_offset }}</td>
+            <td>{{ value.balance }}</td>
+            <td>{{ value.stability }}</td>
+            <td>{{ value.rapidity }}</td>
+            <td><button type="button" class="w3-button w3-round w3-teal" onclick="location.href='{% url 'update_experimental_value' pk=value.pk %}'">Modify</button></td>
+            <td><button type="button" class="w3-button w3-round w3-teal" onclick="location.href='{% url 'delete_experimental_value' pk=value.pk %}'">Delete</button></td>
+          </tr>
+					{% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+{% endblock %}

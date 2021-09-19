@@ -1,0 +1,38 @@
+{% extends 'compass/base.html' %}
+{% load static %}
+
+{% block title %} experimental_model {% endblock %}
+
+{% block content %}
+
+    <div class="w3-container">
+
+      <h1>Input parameters</h1>
+
+      <label for="diskRange">Disk diameter: <span id="diskValue"></span> mm</label>
+      <input type="range" class="w3-input" id="diskRange">
+
+      <label for="magnetOffsetRange">Magnet Offset: <span id="magnetOffsetValue"></span> mm</label>
+      <input type="range" class="w3-input" id="magnetOffsetRange">
+
+      <h1>Output parameters</h1>
+
+      <p>Balance: <span id="balanceValue"></span> °</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="balanceBar" style="height:24px"></div>
+      </div>
+
+      <p>Stability: <span id="stabilityValue"></span> °</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="stabilityBar" style="height:24px"></div>
+      </div>
+
+      <p>Rapidity: <span id="rapidityValue"></span> s</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="rapidityBar" style="height:24px"></div>
+      </div>
+
+    </div> <!-- /container -->
+    <script src="{% static 'compass/js/experimental_model.js' %}"></script>
+
+{% endblock %}

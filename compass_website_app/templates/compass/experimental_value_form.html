@@ -1,0 +1,27 @@
+{% extends 'compass/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} experimental_model {% endblock %}
+
+{% block content %}
+      <form method="post" class="w3-container">
+        <h1>Add new experimental value</h1>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% if form %}
+          {% for form_element in form %}
+          <p>
+            {{ form_element.errors }}
+    				{{ form_element.label_tag }}
+            {% render_field form_element class="w3-input w3-border" %}
+          </p>
+					{% endfor %}
+        {% endif %}
+        <p>
+          <button type="submit" class="w3-button w3-round w3-teal">Submit</button>
+        </p>
+      </form>
+
+    </div>
+
+{% endblock %}

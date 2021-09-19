@@ -1,0 +1,132 @@
+{% extends 'compass/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} experimental_model {% endblock %}
+
+{% block content %}
+
+<div class="w3-container w3-content w3-padding-48">
+  <div class="w3-container">
+    <h1 class="w3-center">Theoretical model</h1>
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+  </div>
+  <br>
+  <div class="w3-card-4 w3-margin">
+    <header class="w3-container w3-blue">
+      <h2>Results</h2>
+    </header>
+
+    <div class="w3-container w3-padding-16">
+
+      <p>Balance: <span id="balanceValue"></span> °</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="balanceBar" style="height:24px"></div>
+      </div>
+
+      <p>Stability: <span id="stabilityValue"></span> °</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="stabilityBar" style="height:24px"></div>
+      </div>
+
+      <p>Rapidity: <span id="rapidityValue"></span> s</p>
+      <div class="w3-border">
+        <div class="w3-grey" id="rapidityBar" style="height:24px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-card-4 w3-margin">
+    <button onclick="hideForm('expFormContainer')" class="w3-btn w3-block w3-blue w3-left-align"><h2>Experiment parameters</h2></button>
+
+    <div class="w3-container w3-padding-16 w3-hide" id="expFormContainer">
+      <form method="post">
+        <div class="w3-half">
+          <div class="w3-margin">
+            <label for="">Oscillation range (m):</label>
+            <input type="number" name="name" maxlength="200" class="w3-input w3-border" required id="" value="0.1">
+            <label for="">Oscillation frenquency (bpm):</label>
+            <input type="number" name="name" maxlength="200" class="w3-input w3-border" required id="" value="140">
+          </div>
+        </div>
+        <div class="w3-half">
+          <div class="w3-margin">
+            <label for="">Compass inclination angle (°):</label>
+            <input type="number" name="name" maxlength="200" class="w3-input w3-border" required id="" value="40">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="w3-half">
+    <div class="w3-card-4 w3-margin">
+      <header class="w3-container w3-blue">
+        <h2>Compass</h2>
+      </header>
+
+      <div class="w3-container w3-padding-16">
+        <label for="compassSelect">Select a compass:</label>
+        <select class="w3-select" name="option" id="compassSelect" onchange="changeCompassSelect()">
+        </select>
+      </div>
+
+      <button onclick="hideForm('compassFormContainer')" class="w3-btn w3-block w3-blue w3-left-align">Modify parameters</button>
+
+      <div class="w3-container w3-padding-16 w3-hide" id="compassFormContainer">
+        <form method="post"  id="compassForm">
+          {{ compass_form.non_field_errors }}
+          {% for form_element in compass_form %}
+            {{ form_element.errors }}
+  		      {{ form_element.label_tag }}
+            {% render_field form_element class="w3-input w3-border" %}
+		      {% endfor %}
+        </form>
+
+        <div class="w3-container">
+          <button class="w3-button w3-round w3-teal w3-left w3-margin" id="compassModify" onclick="modifyCompass()">Modify</button>
+          <button class="w3-button w3-round w3-red w3-left w3-margin" id="compassDelete" onclick="deleteCompass()">Delete</button>
+          <button class="w3-button w3-round w3-teal w3-left w3-margin w3-disabled" id="compassAdd" onclick="createCompass()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>      
+
+  <div class="w3-half">
+    <div class="w3-card-4 w3-margin">
+      <header class="w3-container w3-blue">
+        <h2>Location</h2>
+      </header>
+
+      <div class="w3-container w3-padding-16">
+        <label for="environmentSelect">Select a location:</label>
+        <select class="w3-select" name="option" id="environmentSelect" onchange="changeEnvironmentSelect()">
+        </select>
+      </div>
+      
+      <button onclick="hideForm('environmentFormContainer')" class="w3-btn w3-block w3-blue w3-left-align">Modify parameters</button>
+
+      <div class="w3-container w3-padding-16 w3-hide" id="environmentFormContainer">
+        <form method="post"  id="environmentForm">
+          {{ mag_field_form.non_field_errors }}
+          {% for form_element in mag_field_form %}
+            {{ form_element.errors }}
+		        {{ form_element.label_tag }}
+            {% render_field form_element class="w3-input w3-border" %}
+          {% endfor %}
+        </form>
+  
+        <div class="w3-container">
+          <button class="w3-button w3-round w3-teal w3-left w3-margin" onclick="modifyEnvironment()">Modify</button>
+          <button class="w3-button w3-round w3-red w3-left w3-margin" id="environmentDelete" onclick="deleteEnvironment()">Delete</button>
+          <button class="w3-button w3-round w3-teal w3-disabled w3-left w3-margin" id="environmentAdd" onclick="createEnvironment()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'compass/js/geomag.min.js' %}"></script>
+<script src="{% static 'compass/js/theoretical_model.js' %}"></script>
+<script src="{% static 'compass/js/magnetic_field.js' %}"></script>
+
+{% endblock %}

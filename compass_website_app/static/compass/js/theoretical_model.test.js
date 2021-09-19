@@ -1,0 +1,1 @@
+const loadCompassList = require('./loadCompassList');
