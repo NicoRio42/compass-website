@@ -1,6 +1,6 @@
 # Compass simulator website
 
-This Django project is a web interface for the [Compass simulator](https://github.com/NicoRio42/compass-simulator) package. I wrote this package when I was working at [DECATHLON - GEONAUTE](https://www.decathlon.fr/sport/c0-tous-les-sports/c1-course-d-orientation/_/N-13kthf7) on the improvement of orienteering compasses, as a Research and Development Engineer.
+Web interface for the [Compass simulator](https://github.com/NicoRio42/compass-simulator) package.
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
